@@ -1,0 +1,25 @@
+ -> sudo apt install git: usado para instalar o git
+
+ -> git clone: link do tema (opcional)
+
+ -> download do google 
+
+download do node.js:
+    -> sudo apt install curl
+    -> sudo apt install gcc g++ make perl 
+    -> curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - sudo apt-get install -y nodejs
+    -> sudo apt install nodejs
+Donwload do vscode:
+    thema: link github https://gist.github.com/luizomf/88af1fde8d28b103540b74ec05224279
+    -> settings.json
+    -> remover  terminal zsh 
+    ->remover fontes pagas
+    Extensão: (opcional) 
+    -> omtheme 
+    
+
+
+
+
+
+ ->
