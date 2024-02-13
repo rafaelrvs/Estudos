@@ -30,19 +30,30 @@ def finalizando_app():
    os.system('cls')
    print("Finalizando o App")
 
-def escolher_opcao():
-      opcao_escolhida = int(input('Escolha uma opção: '))
+def opcao_invalida():
+      print('Opção invalida')   
+      input( 'Digite qualquer tecla para voltar')
+      main()
 
-      if opcao_escolhida == 1 :
-             print('Cadastrar Restaurante')
-      elif opcao_escolhida == 2:
-            print("Listar restaurante")
-      elif opcao_escolhida == 3:
-            print("Ativar restaurante")   
-      else:
-            finalizando_app()
+def escolher_opcao():
+      try:
+            opcao_escolhida = int(input('Escolha uma opção: '))
+
+            if opcao_escolhida == 1 :
+                  print('Cadastrar Restaurante')
+            elif opcao_escolhida == 2:
+                  print("Listar restaurante")
+            elif opcao_escolhida == 3:
+                  print("Ativar restaurante")   
+            elif opcao_escolhida == 4: # adicionando para evitar erros
+                  finalizando_app()
+            else:
+                  opcao_invalida()
+      except:
+            opcao_invalida()
 
 def main():
+     os.system('cls')
      exibir_nome_do_programa()
      exibir_opcoes()
      escolher_opcao()
