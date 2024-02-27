@@ -1,2 +1,13 @@
 Instancia de classe = Objeto
  
+
+-> public  Classe visivel para qualquer instancia 
+-> private	Classe visivel apenas para arquivos da mesma classe
+-> protected só a propria Classe pode acessar 
+
+
+
+Diferença a Variavel e atributo
+   -> :Variavel algo criado momentaneamente para armazenar informação
+	->:Atributo local definitivo para armazenar um dado 
+		
