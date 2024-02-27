@@ -31,7 +31,7 @@ public class Aluno {
     public void CalculaNota (){
         double media = (this.nota1+this.nota2) / 2;
    
-        JOptionPane.showMessageDialog(null,media );
+        JOptionPane.showMessageDialog(null,  "Sua media é :"+ media );
   
     }
  
