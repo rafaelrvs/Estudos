@@ -4,6 +4,8 @@
  */
 package javaapplication8;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alunos
@@ -18,7 +20,16 @@ public class JavaApplication8 {
         
         Aluno A = new Aluno();
         
-        A.CadastrarAluno("japao", 3    , 5);
+        double nota1 =  Double.parseDouble( JOptionPane.showInputDialog("Nota1:"));
+        double nota2 =  Double.parseDouble( JOptionPane.showInputDialog("Nota2:"));
+        
+        
+        
+        A.CadastrarAluno("sanguao", nota1,nota2);
+        A.ExibirAluno();
+        A.CalculaNota();
     }
+    
+  
     
 }

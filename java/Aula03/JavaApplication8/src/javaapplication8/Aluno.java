@@ -12,6 +12,7 @@ public class Aluno {
     public String nome_aluno;
     public double nota1;
     public double nota2;
+    public double media;
     
     
     public void CadastrarAluno(String nome ,double n1, double n2){
@@ -22,4 +23,16 @@ public class Aluno {
                 
  
     }
+      
+    public void ExibirAluno (){
+        JOptionPane.showMessageDialog(null, this.nome_aluno);
+    }
+    
+    public void CalculaNota (){
+        double media = (this.nota1+this.nota2) / 2;
+   
+        JOptionPane.showMessageDialog(null,media );
+  
+    }
+ 
 }
