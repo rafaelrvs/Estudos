@@ -1,0 +1,71 @@
+API
+
+INTERFACE DE PROGRAMAÇÃO DE APLICAÇÕES
+
+FRONTEND -> COMUNICA COM BACKEND SOLICITANDO AS INFORMAÇÕES -> PROCESSA E ACESSA OS DADOS E RETORNA A INFORMAÇÃO
+
+
+REST:
+
+    O termo REST (representational state transfer ou transferência de estado representacional)
+     representa um padrão para desenvolvimento de APIs web utilizando o protocolo HTTP para transmissão de dados.
+
+
+      é um modelo de arquitetura e não uma linguagem ou tecnologia de programação,
+       que fornece diretrizes para que os sistemas distribuídos se comuniquem
+       diretamente usando os princípios e protocolos existentes da Web sem a necessidade de SOAP ou outro protocolo sofisticado.
+
+       arquitetura REST é simples e fornece acesso aos recursos para que o cliente REST acesse e renderize os recursos no lado do cliente. No estilo REST, URI ou IDs globais ajudam a identificar cada recurso.
+
+Esta arquitetura usa várias representações de recursos para representar seu tipo, como XML, JSON, Texto, Imagens e assim por diante.
+
+Vale ressaltar que o REST não se limita a solicitações e respostas de registros. Também é possível inserir um novo registro ou deletar um já existente.
+
+
+
+inicio do projeto 
+
+
+npm init -y
+acesse o package.jspn
+
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type":"module",  // adicionado para ser possivel importar e exportar os modulos do projeto
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
+
+criação do servidor
+
+server.js
+
+server.js/ 
+            import http from "http"; 
+            const PORT = 3000
+            const server = http.createServer((req, res)=>{
+                res.writeHead(200, {"Content-Type": "text/plain"}) // headers
+                res.end("Curso de Node.js")
+
+            })
+
+        server.listen(PORT, ()=>{ //metodo que escuta o servidor 
+            console.log("teste")
+        })
+
+
+
+De que forma fornece as informações:
+
+    utiliza se o conceito de rotas
+
+bibliotecas:
+ npm install nodemon // para não precisar finalizar o servidor 
