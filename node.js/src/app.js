@@ -5,9 +5,9 @@ const app = express(); // importando a biblioteca e executando a função expres
 
 
 
-function buscaLivro(id){
-    return livros.findIndex( livros =>{
-        return livros.id === Number(id);
+function buscaLivro(id){// buscando livro verificando o id 
+    return livros.findIndex( livros =>{ //verificando se dentro da array existe o id 
+        return livros.id === Number(id);// se for igual, retorne 
     })
 }
 
@@ -48,12 +48,12 @@ app.get("/livros/:id",(req, res)=>{
 });
 
 app.post("/livros", (req,res)=>{
-    livros.push(req.body);
+    livros.push(req.body);// passando body para alteração
     res.status(201).send("Livro cadastrado com sucesso");
 });
 
 app.put("/livros/:id", (req, res)=>{
-    const index = buscaLivro(req.params.id)
+    const index = buscaLivro(req.params.id)// passando parametros para busca do livro
     livros[index].autor = req.body.autor; //pegando uma propriedade e passando como parametro
     res.status(200).json(livros)
 })
