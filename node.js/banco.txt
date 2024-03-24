@@ -1,0 +1,45 @@
+Persistencia de dados = Salvar os dados
+Dados = informação
+SQL =   structured query language / linguagem de consulta estruturada / tabelas relacionais / relacionamento entre tabelas
+NoSQL =  not only structured query language / guarda as informações juntas para ser consultada mais rapida
+
+
+
+----------------------- criando instancia no mongoDB ----------------------------
+
+atlas -> 
+        new project
+                    build database
+                                    username and password
+                                                        0.0.0.0/0
+                                                            conected
+                                                                drivers
+                                                                    npm install mongoDB
+                                                                        conection string
+biblioteca que faz a conexão 
+mongoose 
+        criar pasta em src 
+                        config
+                                dbConnect.js
+                                            import mongoose, {mongo} from "mongoose";
+                                             
+                                             
+                                             async function conectaDB(){
+                                             mongoose.conect(link)
+                                                return mongoose.conectiok
+                                             }
+
+                                             export default conectaDB
+
+
+                                             -------instancia
+
+                                             const conexao = awaint conectaDB();
+                                             conexao.on("error", (erro)=>{
+                                                console.error
+                                             })
+
+                                             conexao.once("open",()=>{
+                                                
+                                             })
+
