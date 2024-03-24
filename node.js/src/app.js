@@ -1,68 +1,24 @@
-import  express, { raw }  from "express";
+import express from "express";
+import conectaNaDatabase from "./config/dbConnect.js";
+import routes from "./routes/index.js";
 
+const conexao = await conectaNaDatabase();
 
-const app = express(); // importando a biblioteca e executando a função express para dentro da variavel app
-
-
-
-function buscaLivro(id){// buscando livro verificando o id 
-    return livros.findIndex( livros =>{ //verificando se dentro da array existe o id 
-        return livros.id === Number(id);// se for igual, retorne 
-    })
-}
-
-
-
-app.use(express.json())
-const livros = 
-[
-    {
-    id: 1,
-    autor:"chico"
-    },
-    {
-        id: 2,
-        autor:"japo"
-    }
-    
-
-
-
-
-];
-
-app.get("/", (req,res) =>{
-    res.status(200).send("curso de node.js");
-});// passando  a responsabilidade para o express de gerenciar as rotas, ouvindo as  rotas sendo chamadas
-
-
-app.get("/livros", (req,res)=>{
-    res.status(200).json(livros);
+conexao.on("error", (erro) => {
+  console.error("erro de conexão", erro);
 });
 
-
-app.get("/livros/:id",(req, res)=>{
-    const index = buscaLivro(req.params.id)
-    res.status(200).json(livros[index]);
-    
-});
-
-app.post("/livros", (req,res)=>{
-    livros.push(req.body);// passando body para alteração
-    res.status(201).send("Livro cadastrado com sucesso");
-});
-
-app.put("/livros/:id", (req, res)=>{
-    const index = buscaLivro(req.params.id)// passando parametros para busca do livro
-    livros[index].autor = req.body.autor; //pegando uma propriedade e passando como parametro
-    res.status(200).json(livros)
+conexao.once("open", () => {
+  console.log("Conexao com o banco feita com sucesso");
 })
 
+const app = express();
+routes(app);
 
-app.delete("/livros/:id", (req, res)=>{
-    const index = buscaLivro(req.params.id); // buscando livro
-    livros.splice(index, 1)// removendo um elemento da lista
-    res.status(200).send("Elemento excluido")//resposta
-})
+app.delete("/livros/:id", (req, res) => {
+  const index = buscaLivro(req.params.id);
+  livros.splice(index, 1);
+  res.status(200).send("livro removido com sucesso");
+});
 
 export default app;
