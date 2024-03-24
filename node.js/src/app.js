@@ -1,4 +1,4 @@
-import  express  from "express";
+import  express, { raw }  from "express";
 
 
 const app = express(); // importando a biblioteca e executando a função express para dentro da variavel app
@@ -58,5 +58,11 @@ app.put("/livros/:id", (req, res)=>{
     res.status(200).json(livros)
 })
 
+
+app.delete("/livros/:id", (req, res)=>{
+    const index = buscaLivro(req.params.id); // buscando livro
+    livros.splice(index, 1)// removendo um elemento da lista
+    res.status(200).send("Elemento excluido")//resposta
+})
 
 export default app;
