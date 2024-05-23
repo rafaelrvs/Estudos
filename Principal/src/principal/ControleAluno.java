@@ -4,18 +4,17 @@
  */
 package principal;
 
-
-import java.sql.Connection;
+import java.sql.Connection;   
 import java.sql.DriverManager;
 import java.sql.Statement;
-import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 /**
  *
  * @author alunos
  */
 public class ControleAluno {
-    
+    java.sql.ResultSet rs ;
     Aluno aluno = new Aluno ();
     
     private Connection conexao = null;
@@ -77,12 +76,64 @@ public class ControleAluno {
             if(valor==1){
                 JOptionPane.showMessageDialog(null,"Exclusão realizada com sucesso");
             }else{
-                JOptionPane.showMessageDialog(null,"cadastro deu ruim");
+                JOptionPane.showMessageDialog(null,"Não existe exclusão a ser feita");
             }
         }catch(Exception e){
             System.out.println("erro de prepared" + e);
         }
     }
+    
+    public void listar(){
+        
+        PreparedStatement sql ;
+     
+        try{
+             sql = conexao.prepareStatement("Select * from alunos");
+             rs = sql.executeQuery();
+     
+        while(rs.next()){
+            System.out.println(rs.getString("numrgm")+" "+ rs.getString("nome_aluno")+" "+ rs.getString("nota1")+" "+ rs.getString("nota2"));
+         
+        }  
+              
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro"+  e);
+        }
+     
+    }
+    
+    
+    public String consultar(int rgm){
+        String dados ="";
+        PreparedStatement sql;
+        try{
+            
+            sql = conexao.prepareStatement("Select * from alunos where numrgm = ?");
+            sql.setInt(1,rgm);
+            rs = sql.executeQuery();
+            
+            if(rs.next()){
+                dados = (rs.getString("numrgm")+";"
+                        + rs.getString("nome_aluno")+";"
+                        +rs.getString("nota1")+";"
+                        +rs.getString("nota2"));
+                      
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"RGM não cadastrado");
+            }
+            
+   
+    }catch(Exception e){
+            System.out.println("Erro" + e);
+             return null;    
+    }
+        return dados;
+    
+    }
+
+        
 }
     
     

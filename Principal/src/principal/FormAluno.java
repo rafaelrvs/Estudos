@@ -98,7 +98,7 @@ public class FormAluno extends javax.swing.JFrame {
             }
         });
 
-        Exibir.setText("Exibir");
+        Exibir.setText("Consultar");
         Exibir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExibirActionPerformed(evt);
@@ -146,16 +146,16 @@ public class FormAluno extends javax.swing.JFrame {
                         .addComponent(Media, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 21, Short.MAX_VALUE)
+                .addGap(0, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Sair, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Cadastrar1)
                         .addGap(5, 5, 5)
-                        .addComponent(Exibir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
+                        .addComponent(Exibir, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Alterar)
                         .addGap(5, 5, 5)
                         .addComponent(Excluir)
@@ -227,11 +227,21 @@ public class FormAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_ExcluirActionPerformed
 
     private void ListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarActionPerformed
-        // TODO add your handling code here:
+        controle.listar();
     }//GEN-LAST:event_ListarActionPerformed
 
     private void ExibirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExibirActionPerformed
-        // TODO add your handling code here:
+        int rgm = Integer.parseInt(this.inRgm.getText());
+         String info = controle.consultar(rgm);         
+         String vetor[]=info.split(";"); 
+         
+         innome.setText(vetor[1]);
+         nota1.setText(vetor[2]);
+         nota2.setText(vetor[2]);
+        
+        
+        
+        
     }//GEN-LAST:event_ExibirActionPerformed
 
     private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
