@@ -41,7 +41,7 @@ public class FormInventario extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        Input6 = new javax.swing.JTextField();
+        registroConsulta = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -49,6 +49,12 @@ public class FormInventario extends javax.swing.JFrame {
         local.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 localActionPerformed(evt);
+            }
+        });
+
+        registro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registroActionPerformed(evt);
             }
         });
 
@@ -139,7 +145,7 @@ public class FormInventario extends javax.swing.JFrame {
                         .addGap(100, 100, 100)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Input6, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)))
+                        .addComponent(registroConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)))
                 .addGap(25, 25, 25))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -167,10 +173,11 @@ public class FormInventario extends javax.swing.JFrame {
                     .addComponent(local, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(registro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Input6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(registroConsulta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(registro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cadastrar)
@@ -194,15 +201,22 @@ public class FormInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_localActionPerformed
 
     private void AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlterarActionPerformed
-        // TODO add your handling code here:
+         int quantidade = Integer.parseInt(this.quantidade.getText());
+          int registro =  Integer.parseInt(this.registro.getText());
+          String nome = this.nome.getText();
+          String local = this.local.getText();
+           String descricao = this.descricao.getText();
+        
+        controle.alterar(quantidade,registro,nome,descricao,local);
     }//GEN-LAST:event_AlterarActionPerformed
 
     private void ListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarActionPerformed
-        // TODO add your handling code here:
+        controle.listar();
     }//GEN-LAST:event_ListarActionPerformed
 
     private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
-        // TODO add your handling code here:
+              controle.excluir(Integer.parseInt(this.registroConsulta.getText()));
+              this.registroConsulta.setText("");
     }//GEN-LAST:event_ExcluirActionPerformed
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
@@ -210,18 +224,33 @@ public class FormInventario extends javax.swing.JFrame {
           int registro =  Integer.parseInt(this.registro.getText());
           String nome = this.nome.getText();
           String local = this.local.getText();
+           String descricao = this.descricao.getText();
         
-        controle.cadastrar(registro,quantidade,nome,local);
+        controle.cadastrar(quantidade,registro,nome,descricao,local);
              
       this.quantidade.setText("");
       this.registro.setText("");
       this.nome.setText("");
       this.local.setText("");
+      this.descricao.setText("");
     }//GEN-LAST:event_CadastrarActionPerformed
 
     private void ConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultarActionPerformed
-        // TODO add your handling code here:
+      int reg = Integer.parseInt(this.registroConsulta.getText());
+         String info = controle.consultar(reg);         
+         String vetor[]=info.split(";"); 
+            nome.setText(vetor[0]);
+            descricao.setText(vetor[1]);
+            quantidade.setText(vetor[2]);
+            local.setText(vetor[3]);
+            registro.setText(vetor[4]);
+
+        
     }//GEN-LAST:event_ConsultarActionPerformed
+
+    private void registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_registroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,7 +292,6 @@ public class FormInventario extends javax.swing.JFrame {
     private javax.swing.JButton Cadastrar;
     private javax.swing.JButton Consultar;
     private javax.swing.JButton Excluir;
-    private javax.swing.JTextField Input6;
     private javax.swing.JButton Listar;
     private javax.swing.JTextField descricao;
     private javax.swing.JLabel jLabel1;
@@ -276,5 +304,6 @@ public class FormInventario extends javax.swing.JFrame {
     private javax.swing.JTextField nome;
     private javax.swing.JTextField quantidade;
     private javax.swing.JTextField registro;
+    private javax.swing.JTextField registroConsulta;
     // End of variables declaration//GEN-END:variables
 }

@@ -27,7 +27,7 @@ public class ControleInventario {
             String servername="localhost:3306";
             String usuario="root";
             String senha="";
-            String banco="bdaluno";
+            String banco="inventario";
             String driverName="com.mysql.cj.jdbc.Driver";
             Class.forName(driverName);
             String url = "jdbc:mysql://"+servername+"/"+banco+"?useTimezone=true&serverTimezone=UTC";
@@ -40,19 +40,22 @@ public class ControleInventario {
         }
     }
 
-    public void cadastrar(int quantidade ,int registro ,String nome , String local ){
+    public void cadastrar(int quantidade ,int registro ,String nome ,String descricao, String local ){
         estoque.setQuantidade(quantidade);
         estoque.setRegistro(registro);
         estoque.setNome(nome);
         estoque.setLocal(local);
+        estoque.setDescricao(descricao);
         try{
             // Preparando a declaração SQL
-            sql = conexao.prepareStatement("INSERT INTO inventario_produto (quantidade, registro, nome_produto, local) VALUES (?, ?, ?, ?)");
+            sql = conexao.prepareStatement("INSERT INTO inventario_produto (quantidade, "
+                    + "registro, nome_produto, local, descricao) VALUES (?, ?, ?, ?, ?)");
             // Configurando os parâmetros
             sql.setInt(1, quantidade);
             sql.setInt(2, registro);
             sql.setString(3, nome);
             sql.setString(4, local);
+            sql.setString(5, descricao);
             // Executando a atualização
             int valor = sql.executeUpdate();
             if(valor==1){
@@ -108,7 +111,11 @@ public class ControleInventario {
              rs = sql.executeQuery();
      
         while(rs.next()){
-            System.out.println(rs.getString("registro")+" "+ rs.getString("nome_produto")+" "+ rs.getString("local")+" "+ rs.getString("quantidade"));
+            System.out.println(rs.getString("registro")+
+                    " "+ rs.getString("nome_produto")
+                    +" "+ rs.getString("local")+" "
+                    + rs.getString("quantidade")+" "
+                    +rs.getString("descricao"));
          
         }  
               
@@ -118,5 +125,87 @@ public class ControleInventario {
         }
      
     }
+    
+    
+     public String consultar(int registro) {
+    String dados = "";
+    PreparedStatement sql = null;
+    
+    try {
+        sql = conexao.prepareStatement("SELECT * FROM inventario_produto WHERE registro = ?");
+        sql.setInt(1, registro);
+        rs = sql.executeQuery();
+        
+        if (rs.next()) {
+            dados = rs.getString("nome_produto") + ";"
+                  + rs.getString("descricao") + ";" // Corrigido para o nome correto da coluna
+                  + rs.getString("quantidade") + ";"
+                  + rs.getString("local") + ";"
+                  + rs.getString("registro") + ";";
+        } else {
+            JOptionPane.showMessageDialog(null, "Registro não encontrado");
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Erro ao consultar registro: " + e.getMessage());
+        e.printStackTrace(); // Isso ajuda a identificar a origem do erro
+    } finally {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (sql != null) {
+                sql.close();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao fechar conexão: " + e.getMessage());
+            e.printStackTrace(); // Isso ajuda a identificar a origem do erro
+        }
+    }
+    
+    return dados;
+}
+
+     
+     public void alterar(int quantidade, int registro, String nome, String descricao, String local) {
+    estoque.setQuantidade(quantidade);
+    estoque.setRegistro(registro);
+    estoque.setNome(nome);
+    estoque.setLocal(local);
+    estoque.setDescricao(descricao);
+    try {
+        // Preparando a declaração SQL
+        sql = conexao.prepareStatement("UPDATE inventario_produto SET quantidade = ?, nome_produto = ?, local = ?, descricao = ? WHERE registro = ?");
+        // Configurando os parâmetros
+        sql.setInt(1, quantidade);
+        sql.setString(2, nome);
+        sql.setString(3, local);
+        sql.setString(4, descricao);
+        sql.setInt(5, registro);
+        // Executando a atualização
+        int valor = sql.executeUpdate();
+        if (valor == 1) {
+            JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso");
+        } else {
+            JOptionPane.showMessageDialog(null, "Falha ao alterar");
+        }
+    } catch (Exception e) {
+        System.out.println("Erro ao executar a operação no banco de dados: " + e);
+    } finally {
+        // Fechando a conexão e o PreparedStatement
+        try {
+            if (sql != null) {
+                sql.close();
+            }
+            if (conexao != null) {
+                conexao.close();
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao fechar a conexão: " + e);
+        }
+    }
+}
+
+    
+    
     
 }
