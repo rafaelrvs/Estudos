@@ -1,5 +1,5 @@
 
-# STORE HAPPY MONGOSEW
+# STORE HAPPY MONGOSE
 
 **Descrição:** 
 O Store Happy Mongose é uma plataforma de ecommerce dedicada à intermediação de jogos. Seu principal objetivo é proporcionar aos usuários uma experiência fluida e conveniente ao adquirir seus jogos favoritos. Através da plataforma, os usuários podem efetuar login, explorar a variedade de jogos disponíveis para compra e completar suas transações. O sistema inclui um carrinho de compras para facilitar o gerenciamento dos itens selecionados, bem como a conclusão do pedido, que resulta na geração de um código de resgate para o jogo adquirido.
